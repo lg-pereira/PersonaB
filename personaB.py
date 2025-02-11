@@ -38,26 +38,23 @@ def main():
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
-        
-    # Inicializa a carta na sessão, se não existir
+
+    # Slider para controlar o tamanho da fonte
+    font_size = st.sidebar.slider("Tamanho da Fonte:", min_value=0.8, max_value=2.0, value=1.2, step=0.1)
+
+    # Inicializa o estado na sessão, se não existir
+    if 'flipped' not in st.session_state:
+        st.session_state.flipped = False
     if 'current_card' not in st.session_state:
         st.session_state.current_card = get_random_card(df)
 
-    # Função para verificar o estado da carta
-    def handle_card_action():
-        st.write("Botão clicado!")  # Verificação
+    # Botão para animar a carta
+    if st.button("Virar Carta"):
+        st.session_state.flipped = not st.session_state.flipped
 
-        # Estado para controlar a animação de virada
-        if 'flipped' not in st.session_state:
-            st.session_state.flipped = False
-        else:
-            st.session_state.current_card = get_random_card(df)
-            st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
-        
-
-    # Botão para gerar uma nova carta
-    if st.button("Próxima carta"):
-       handle_card_action()
+    # Botão para gerar uma nova carta (apenas se a carta estiver virada)
+    if st.button("Nova Carta") and st.session_state.flipped:
+        st.session_state.current_card = get_random_card(df)
 
    # CSS para estilizar o card
     card_style = """
