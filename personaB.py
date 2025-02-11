@@ -34,13 +34,10 @@ def main():
     # Carrega os dados
     try:
         df = load_data(csv_url)
-        st.success("Dados carregados com sucesso!")
+        # st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
-
-    # Slider para controlar o tamanho da fonte
-    font_size = st.sidebar.slider("Tamanho da Fonte:", min_value=0.8, max_value=2.0, value=1.2, step=0.1)
 
     # Estado para controlar a animação de virada
     if 'flipped' not in st.session_state:
@@ -58,7 +55,7 @@ def main():
 
 
     # Botão para gerar uma nova carta
-    if st.button("Próxima carta"):
+    if st.button("Próximo jogador"):
        handle_card_action()
 
 
