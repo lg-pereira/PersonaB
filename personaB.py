@@ -131,7 +131,7 @@ card_style = """
 
 # Main App
 def main():
-    st.title("Pictionary Card Game")
+    st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
     url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
@@ -145,24 +145,27 @@ def main():
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
 
-    # Estado para controlar a animação de virada
+    # Slider para controlar o tamanho da fonte
+    font_size = st.sidebar.slider("Tamanho da Fonte:", min_value=0.8, max_value=2.0, value=1.2, step=0.1)
+
+    # Inicializa o estado na sessão, se não existir
     if 'flipped' not in st.session_state:
         st.session_state.flipped = False
-
-    # Botão para gerar uma nova carta
-    if st.button("Gerar Nova Carta"):
-        st.session_state.current_card = get_random_card(df)
-        st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
-
-    # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
+        st.session_state.current_card = get_random_card(df)
+
+    # Botão para animar a carta
+    if st.button("Virar Carta"):
+        st.session_state.flipped = not st.session_state.flipped
+
+    # Botão para gerar uma nova carta (apenas se a carta estiver virada)
+    if st.button("Nova Carta") and st.session_state.flipped:
         st.session_state.current_card = get_random_card(df)
 
     # Exibe o CSS
     st.markdown(card_style, unsafe_allow_html=True)
 
     # Exibe o card
-      # Exibe o card
     card_html = f"""
     <div class="card-container">
         <div class="card {'flipped' if st.session_state.flipped else ''}">
