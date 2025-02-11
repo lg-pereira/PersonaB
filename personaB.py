@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import time  # Para simular o tempo de jogo
 import streamlit.components.v1 as components
 
 # Configurações da página Streamlit
@@ -23,8 +24,8 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
-# Main App
-def main():
+# Start App
+def start():
     st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
@@ -195,6 +196,27 @@ def main():
     """
 
     st.markdown(card_html, unsafe_allow_html=True)
+
+def main():
+    st.title("Menu Game Card")
+
+    # Opções do menu
+    num_equipes = st.slider("Número de Equipes", min_value=1, max_value=10, value=2)
+    tempo_jogo = st.number_input("Tempo (minutos)", min_value=1, max_value=60, value=10)
+
+    # Botão Iniciar
+    if st.button("Iniciar"):
+        st.write(f"Jogo iniciado com {num_equipes} equipes e tempo de {tempo_jogo} minutos!")
+        # Simulação do jogo (substitua com a lógica real do seu jogo)
+        with st.empty():  # Cria um espaço vazio para atualizações
+            for i in range(tempo_jogo * 60):  # Simula segundos
+                time.sleep(1)  # Pausa de 1 segundo
+                tempo_restante = tempo_jogo * 60 - i
+                minutos = tempo_restante // 60
+                segundos = tempo_restante % 60
+                st.write(f"Tempo restante: {minutos:02d}:{segundos:02d}")
+        st.success("Fim do jogo!")
+
 
 if __name__ == "__main__":
     main()
