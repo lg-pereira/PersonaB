@@ -41,7 +41,7 @@ def main():
         
     # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
-    st.session_state.current_card = get_random_card(df)
+        st.session_state.current_card = get_random_card(df)
 
     # Função para verificar o estado da carta
     def handle_card_action():
