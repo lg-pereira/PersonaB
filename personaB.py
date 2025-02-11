@@ -265,7 +265,7 @@ def main():
     if st.button("Iniciar"):
         if equipe > num_equipes:
             equipe = 1
-        start_time(num_equipes, tempo_segundos, equipe)
+        start_timer(num_equipes, tempo_segundos, equipe)
     
 
 if __name__ == "__main__":
