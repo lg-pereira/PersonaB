@@ -62,13 +62,25 @@ card_style = """
 
 .card-front {
     background-color: #f9f9f9; /* Cor de fundo da frente */
-    color: #333;
+    color: #7EA1C5;
+    text-align: center;
+    display: flex; /* Alterado para flex */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    font-size: 1.5em;       /* Aumenta o tamanho da fonte */
 }
 
 .card-back {
     background-color: #e9e9e9; /* Cor de fundo do verso */
-    color: #333;
+    color: #7C8D9E;
+    text-align: center;
     transform: rotateY(180deg);
+    display: flex; /* Alterado para flex */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
 .card-id {
@@ -79,38 +91,41 @@ card_style = """
     background-color: white;
 }
 
-.card-options {
+.card-options {{
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
-}
+}}
 
-.card-options li {
+.card-options li {{
     padding: 8px 12px;
     margin-bottom: 5px;
     border-radius: 5px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    text-align: left;
-    width: 100%;
+    border: 3px solid #ddd;
+    text-align: left; 
+    width: 90%;               
     box-sizing: border-box;
-}
+    font-size: 1.2em;          /* Aumentado o tamanho da fonte */
+    display: inline-block;    /* Para espalhar horizontalmente */
+    margin: 5px;
+}}
 
 /* Adicione um estilo para o botão */
-.stButton>button {
-    background-color: #4CAF50; /* Verde */
-    border: none;
+.stButton>button {{
+    background-color: #5D6770;
+    border: 3px solid #7C8D9E;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 100%;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 12px;
-}
+    border-radius: 15px;
+}}
 </style>
 """
 
