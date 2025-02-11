@@ -165,7 +165,7 @@ def main():
       # Exibe o card
     card_html = f"""
     <div class="card-container">
-        <div class="card {{'flipped' if st.session_state.flipped else ''}}">
+        <div class="card {'flipped' if st.session_state.flipped else ''}">
             <div class="card-face card-front">
                 <h2>PERSONA B</h2>
             </div>
