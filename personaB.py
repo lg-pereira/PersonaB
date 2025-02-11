@@ -212,7 +212,7 @@ def start():
     st.markdown(card_html, unsafe_allow_html=True)
 
 def start_timer(num_equipes, tempo_segundos, equipe):
-    st.write(f"É a vez da Equipe {equipe}, com tempo de {minutos:02d}:{segundos:02d}!")
+    st.write(f"É a vez da Equipe {equipe}!")
     
     # Contagem Regressiva
     countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
