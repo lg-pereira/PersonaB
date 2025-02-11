@@ -230,7 +230,7 @@ def main():
 
     # Botão Iniciar (fora do sidebar)
     if st.button("Iniciar"):
-        for equipe in range(1, num_equipes + 1):
+        if equipe <= num_equipes:
             st.write(f"É a vez da Equipe {equipe}, com tempo de {minutos:02d}:{segundos:02d}!")
 
             # Contagem Regressiva
@@ -242,7 +242,7 @@ def main():
 
             # Tocar a buzina (somente Windows)
             try:
-                st.audio("assets/buzer_start.mp3", format="audio/mp3", autoplay=True)  # Buzina
+                st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
             except:
                 st.warning("Não foi possível tocar a buzina")
             
@@ -256,11 +256,14 @@ def main():
                 time.sleep(1)
 
             try:
-                st.audio("assets/looser.mp3", format="audio/mp3", autoplay=True)  # Buzina
+                st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
             except:
                 st.warning("Não foi possível tocar a buzina")
             timer_placeholder.write("Tempo da Equipe Esgotado!")
             st.success(f"Tempo da Equipe {equipe} esgotado!")
+            equipe++
+        else:
+            equipe = 1
 
 if __name__ == "__main__":
     main()
