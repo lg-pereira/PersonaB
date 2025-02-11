@@ -93,7 +93,7 @@ card_style = """
     background-color: #fff;
     border: 3px solid #ddd;
     text-align: left;
-    width: 750%;
+    width: 75%;
     box-sizing: border-box;
 }
 
