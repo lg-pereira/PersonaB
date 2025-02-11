@@ -63,6 +63,7 @@ card_style = """
 .card-front {
     background-color: #f9f9f9; /* Cor de fundo da frente */
     color: #7EA1C5;
+    text-align: center;
 }
 
 .card-back {
@@ -96,6 +97,9 @@ card_style = """
     text-align: left;
     width: 90%;
     box-sizing: border-box;
+    font-size: 1.2em;   /* Adicionado tamanho da fonte */
+    display: inline-block; /* Para espalhar horizontalmente */
+    margin: 5px;         /* Adicionado margem */
 }
 
 /* Adicione um estilo para o botão */
