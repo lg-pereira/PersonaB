@@ -230,40 +230,42 @@ def main():
 
     # Botão Iniciar (fora do sidebar)
     if st.button("Iniciar"):
-        if equipe <= num_equipes:
-            st.write(f"É a vez da Equipe {equipe}, com tempo de {minutos:02d}:{segundos:02d}!")
-
-            # Contagem Regressiva
-            countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
-            for i in range(3, 0, -1):
-                countdown_placeholder.write(f"Começando em: {i}...")
-                time.sleep(1)
-            countdown_placeholder.write("VALENDO!")
-
-            # Tocar a buzina (somente Windows)
-            try:
-                st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
-            except:
-                st.warning("Não foi possível tocar a buzina")
-            
-            # Simulação do jogo (substitua com a lógica real do seu jogo)
-            timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
-
-            for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
-                minutos_restantes = i // 60
-                segundos_restantes = i % 60
-                timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-                time.sleep(1)
-
-            try:
-                st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
-            except:
-                st.warning("Não foi possível tocar a buzina")
-            timer_placeholder.write("Tempo da Equipe Esgotado!")
-            st.success(f"Tempo da Equipe {equipe} esgotado!")
-            equipe =+1
-        else:
+        if equipe > num_equipes:
             equipe = 1
+        start_time(num_equipes, tempo_segundos, equipe)
+    
+    def start_timer(num_equipes, tempo_segundos, equipe)
+        st.write(f"É a vez da Equipe {equipe}, com tempo de {minutos:02d}:{segundos:02d}!")
+
+        # Contagem Regressiva
+        countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
+        for i in range(3, 0, -1):
+            countdown_placeholder.write(f"Começando em: {i}...")
+            time.sleep(1)
+        countdown_placeholder.write("VALENDO!")
+
+        # Tocar a buzina (somente Windows)
+        try:
+            st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
+        except:
+            st.warning("Não foi possível tocar a buzina")
+        
+        # Simulação do jogo (substitua com a lógica real do seu jogo)
+        timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
+
+        for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
+            minutos_restantes = i // 60
+            segundos_restantes = i % 60
+            timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
+            time.sleep(1)
+
+        try:
+            st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
+        except:
+            st.warning("Não foi possível tocar a buzina")
+        timer_placeholder.write("Tempo da Equipe Esgotado!")
+        st.success(f"Tempo da Equipe {equipe} esgotado!")
+        equipe =+1
 
 if __name__ == "__main__":
     main()
