@@ -181,26 +181,26 @@ def main():
     # CSS para estilizar o card
     card_style = f"""
     <style>
-    .card-container {{
+    .card-container {
         perspective: 1000px;
         width: 300px;
         height: 400px;
         margin: 20px auto;
-    }}
+    }
 
-    .card {{
+    .card {
         position: relative;
         width: 100%;
         height: 100%;
         transition: transform 0.8s;
         transform-style: preserve-3d;
-    }}
+    }
 
-    .card.flipped {{
+    .card.flipped {
         transform: rotateY(180deg);
-    }}
+    }
 
-    .card-face {{
+    .card-face {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -213,9 +213,9 @@ def main():
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #f9f9f9;
-    }}
+    }
 
-    .card-front {{
+    .card-front {
         background-color: #f9f9f9;
         color: #7EA1C5;
         text-align: center;
@@ -223,9 +223,9 @@ def main():
         justify-content: center; /* Centraliza horizontalmente */
         align-items: center;    /* Centraliza verticalmente */
         font-size: 1.5em;       /* Aumenta o tamanho da fonte */
-    }}
+    }
 
-    .card-back {{
+    .card-back {
         background-color: #e9e9e9;
         color: #7C8D9E;
         text-align: center;
@@ -239,24 +239,24 @@ def main():
         background-image: url('assets/card_back.jpg'); /* Adiciona a imagem de fundo */
         background-size: cover;                  /* Ajusta a imagem para cobrir todo o fundo */
         background-repeat: no-repeat;           /* Evita a repetição da imagem */
-    }}
+    }
 
-    .card-id {{
+    .card-id {
         border: 2px solid silver;
         padding: 5px 10px;
         border-radius: 5px;
         margin-bottom: 10px;
         background-color: white;
-    }}
+    }
 
-    .card-options {{
+    .card-options {
         list-style: none;
         padding: 0;
         margin: 0;
         width: 100%;
-    }}
+    }
 
-    .card-options li {{
+    .card-options li {
         padding: 8px 12px;
         margin-bottom: 5px;
         border-radius: 5px;
@@ -271,7 +271,7 @@ def main():
         overflow-wrap: break-word; /* Permite quebras de linha em palavras longas */
         word-break: break-all;      /* Força a quebra de palavras se necessário */
         max-width: 150px;          /* Define uma largura máxima */
-    }}
+    }
 
     .stButton>button {{
         background-color: #5D6770;
@@ -295,7 +295,7 @@ def main():
     # Exibe o card
     card_html = f"""
     <div class="card-container">
-        <div class="card {{'flipped' if st.session_state.flipped else ''}}">
+        <div class="card {'flipped' if st.session_state.flipped else ''}">
             <div class="card-face card-front">
                 <h2>PERSONA B</h2>
             </div>
