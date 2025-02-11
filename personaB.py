@@ -25,18 +25,6 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
-def audio_end ():
-    sample_rate = 44100  # 44100 samples per second
-    seconds = 2  # Note duration of 2 seconds
-    
-    frequency_la = 440  # Our played note will be 440 Hz
-    
-    # Generate array with seconds*sample_rate steps, ranging between 0 and seconds
-    t = np.linspace(0, seconds, seconds * sample_rate, False)
-    
-    # Generate a 440 Hz sine wave
-    note_la = np.sin(frequency_la * t * 2 * np.pi)
-    st.audio(note_la, sample_rate=sample_rate)
 
 # Start App
 def start():
@@ -221,13 +209,14 @@ def start_timer(num_equipes, tempo_segundos, equipe):
         time.sleep(1)
     countdown_placeholder.write("VALENDO!")
     
-    # Tocar a buzina (somente Windows)
+    audio_start_placeholder = st.empty()
     try:
-        st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
+        # Renderiza o áudio dentro do placeholder
+        with audio_start_placeholder:
+            st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)
     except:
-        st.warning("Não foi possível tocar a buzina")
+        st.warning("Não foi possível tocar a buzina de início")
     
-    # Simulação do jogo (substitua com a lógica real do seu jogo)
     timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
     
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
@@ -236,12 +225,14 @@ def start_timer(num_equipes, tempo_segundos, equipe):
         timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
         time.sleep(1)
     
+    # Placeholder para o áudio de fim
+    audio_end_placeholder = st.empty()
     try:
-        st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)  # Buzina
+        # Renderiza o áudio dentro do placeholder
+        with audio_end_placeholder:
+            st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
     except:
-        st.warning("Não foi possível tocar a buzina")
-    timer_placeholder.write("Tempo da Equipe Esgotado!")
-    st.success(f"Tempo da Equipe {equipe} esgotado!")
+        st.warning("Não foi possível tocar a buzina de fim")
     equipe =+1
 
 def main():
@@ -250,7 +241,7 @@ def main():
     # Sidebar para opções
     with st.sidebar:
         st.header("Configurações do Jogo")
-        num_equipes = st.slider("Número de Equipes", min_value=1, max_value=4, value=2)
+        num_equipes = st.slider("Número de Equipes", min_value=2, max_value=5, value=2)
         equipe = 1
         # Opção de tempo em segundos (30 a 120)
         tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
@@ -266,6 +257,7 @@ def main():
         if equipe > num_equipes:
             equipe = 1
         start_timer(num_equipes, tempo_segundos, equipe)
+        start()
     
 
 if __name__ == "__main__":
