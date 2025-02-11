@@ -200,21 +200,33 @@ def start():
 def main():
     st.title("Menu Game Card")
 
-    # Opções do menu
-    num_equipes = st.slider("Número de Equipes", min_value=1, max_value=10, value=2)
-    tempo_jogo = st.number_input("Tempo (minutos)", min_value=1, max_value=60, value=10)
+    # Sidebar para opções
+    with st.sidebar:
+        st.header("Configurações do Jogo")
+        num_equipes = st.slider("Número de Equipes", min_value=1, max_value=4, value=2)
 
-    # Botão Iniciar
+        # Opção de tempo em segundos (30 a 120)
+        tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
+
+        # Converter segundos em minutos e segundos para exibição
+        minutos = tempo_segundos // 60
+        segundos = tempo_segundos % 60
+
+        st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
+
+
+    # Botão Iniciar (fora do sidebar)
     if st.button("Iniciar"):
-        st.write(f"Jogo iniciado com {num_equipes} equipes e tempo de {tempo_jogo} minutos!")
+        st.write(f"Jogo iniciado com {num_equipes} equipes e tempo de {minutos:02d}:{segundos:02d}!")
+
         # Simulação do jogo (substitua com a lógica real do seu jogo)
-        with st.empty():  # Cria um espaço vazio para atualizações
-            for i in range(tempo_jogo * 60):  # Simula segundos
-                time.sleep(1)  # Pausa de 1 segundo
-                tempo_restante = tempo_jogo * 60 - i
-                minutos = tempo_restante // 60
-                segundos = tempo_restante % 60
-                st.write(f"Tempo restante: {minutos:02d}:{segundos:02d}")
+        with st.empty():
+            for i in range(tempo_segundos):
+                time.sleep(1)
+                tempo_restante = tempo_segundos - i
+                minutos_restantes = tempo_restante // 60
+                segundos_restantes = tempo_restante % 60
+                st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
         st.success("Fim do jogo!")
 
 
