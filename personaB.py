@@ -34,7 +34,7 @@ def main():
     # Carrega os dados
     try:
         df = load_data(csv_url)
-        # st.success("Dados carregados com sucesso!")
+        st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
@@ -46,12 +46,21 @@ def main():
     if 'flipped' not in st.session_state:
         st.session_state.flipped = False
 
+    # Função para verificar o estado da carta
+    def handle_card_action():
+        if st.session_state.flipped:
+            # Já está virado, então apenas desvira
+            st.session_state.flipped = False
+        else:
+            # Se a carta não estiver virada, gera uma nova carta e vira
+            st.session_state.current_card = get_random_card(df)
+            st.session_state.flipped = True
+
+
     # Botão para gerar uma nova carta
     if st.button("Próxima carta"):
-        if st.session_state.flipped: # So gera uma nova carta se estiver virado
-            st.session_state.current_card = get_random_card(df)
+       handle_card_action()
 
-        st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
 
     # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
