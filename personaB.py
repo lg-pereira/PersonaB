@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import time  # Para simular o tempo de jogo
 import streamlit.components.v1 as components
+import numpy as np
 
 # Configurações da página Streamlit
 st.set_page_config(
@@ -23,6 +24,19 @@ def load_data(url):
 def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
+
+def audio_end ():
+    sample_rate = 44100  # 44100 samples per second
+    seconds = 2  # Note duration of 2 seconds
+    
+    frequency_la = 440  # Our played note will be 440 Hz
+    
+    # Generate array with seconds*sample_rate steps, ranging between 0 and seconds
+    t = np.linspace(0, seconds, seconds * sample_rate, False)
+    
+    # Generate a 440 Hz sine wave
+    note_la = np.sin(frequency_la * t * 2 * np.pi)
+    st.audio(note_la, sample_rate=sample_rate)
 
 # Start App
 def start():
@@ -227,7 +241,8 @@ def main():
                 minutos_restantes = tempo_restante // 60
                 segundos_restantes = tempo_restante % 60
                 st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-        st.success("Fim do jogo!")
+        st.success("Fim do tempo!")
+            audio_end()
 
 
 if __name__ == "__main__":
