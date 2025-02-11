@@ -28,7 +28,7 @@ def main():
     st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
-    url = "https://docs.google.com/sheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
+    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
     csv_url = url+"/export?format=csv"
 
     # Carrega os dados
