@@ -72,7 +72,7 @@ card_style = """
 }
 
 .card-id {
-    border: 2px solid silver;
+    border: 4px solid gold; /* Borda dourada e mais grossa */
     padding: 5px 10px;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -92,9 +92,12 @@ card_style = """
     border-radius: 5px;
     background-color: #fff;
     border: 1px solid #ddd;
-    text-align: left;
+    text-align: center; /* Centraliza o texto horizontalmente */
     width: 100%;
     box-sizing: border-box;
+    display: flex; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza verticalmente */
 }
 
 /* Adicione um estilo para o botão */
