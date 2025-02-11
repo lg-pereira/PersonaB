@@ -242,7 +242,7 @@ def main():
 
             # Tocar a buzina (somente Windows)
             try:
-                playsound("assets/buzina.ogg")   # Buzina padrão do sistema
+                st.audio("assets/buzina.ogg", format="audio/ogg", autoplay=True)  # Buzina
             except:
                 st.warning("Não foi possível tocar a buzina.")
 
