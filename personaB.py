@@ -218,7 +218,7 @@ def main():
     with st.sidebar:
         st.header("Configurações do Jogo")
         num_equipes = st.slider("Número de Equipes", min_value=1, max_value=4, value=2)
-
+        equipe = 1
         # Opção de tempo em segundos (30 a 120)
         tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
 
