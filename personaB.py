@@ -70,6 +70,7 @@ card_style = """
 .card-back {
     background-color: #e9e9e9; /* Cor de fundo do verso */
     color: #7C8D9E;
+    text-align: center;
     transform: rotateY(180deg);
 }
 
@@ -156,7 +157,7 @@ def main():
     <div class="card-container">
         <div class="card {'flipped' if st.session_state.flipped else ''}">
             <div class="card-face card-front">
-                <h2>PERSONA B <br>SEU IMAGEM E AÇÃO<br>COM TEMAS BÍBLICOS!</h2>
+                <h2>PERSONA B <br>IMAGEM E AÇÃO<br>COM TEMAS BÍBLICOS!</h2>
             </div>
             <div class="card-face card-back">
                 <div class="card-id">{st.session_state.current_card['ID']}</div>
