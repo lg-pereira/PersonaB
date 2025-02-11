@@ -28,7 +28,8 @@ def main():
     st.title("Pictionary Card Game")
 
     # URL do Google Sheets CSV
-    csv_url = "https://docs.google.com/sheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso/export?format=csv"
+    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
+    csv_url = url+"/export?format=csv"
 
     # Carrega os dados
     try:
