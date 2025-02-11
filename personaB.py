@@ -23,14 +23,42 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
-# CSS para estilizar o card
+# Main App
+def main():
+    st.title("Persona B Card Game")
 
-card_style = """
+    # URL do Google Sheets CSV
+    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
+    csv_url = url+"/export?format=csv"
+
+ # Carrega os dados
+    try:
+        df = load_data(csv_url)
+        # st.success("Dados carregados com sucesso!")
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados: {e}")
+        return  # Aborta a execução se não conseguir carregar os dados
+
+    # Estado para controlar a animação de virada
+    if 'flipped' not in st.session_state:
+        st.session_state.flipped = False
+
+    # Botão para gerar uma nova carta
+    if st.button("Gerar Nova Carta"):
+        st.session_state.current_card = get_random_card(df)
+        st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
+
+    # Inicializa a carta na sessão, se não existir
+    if 'current_card' not in st.session_state:
+        st.session_state.current_card = get_random_card(df)
+
+    # CSS para estilizar o card
+    card_style = """
     <style>
     .card-container {
         perspective: 1000px;
-        width: 350px; /* Ajuste o tamanho conforme necessário */
-        height: 450px; /* Ajuste o tamanho conforme necessário */
+        width: 300px; /* Ajuste o tamanho conforme necessário */
+        height: 400px; /* Ajuste o tamanho conforme necessário */
         margin: 20px auto;
     }
     
@@ -92,14 +120,14 @@ card_style = """
         background-color: white;
     }
     
-    .card-options {
+    .card-options {{
         list-style: none;
         padding: 0;
         margin: 0;
         width: 100%;
-    }
+    }}
     
-    .card-options li {
+    .card-options li {{
         padding: 8px 12px;
         margin-bottom: 5px;
         border-radius: 5px;
@@ -111,11 +139,10 @@ card_style = """
         font-size: 1.2em;          /* Aumentado o tamanho da fonte */
         display: inline-block;    /* Para espalhar horizontalmente */
         margin: 5px;
-    
-    }
+    }}
     
     /* Adicione um estilo para o botão */
-    .stButton>button {
+    .stButton>button {{
         background-color: #5D6770;
         border: 3px solid #7C8D9E;
         color: white;
@@ -127,39 +154,9 @@ card_style = """
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 15px;
-    }
+    }}
     </style>
     """
-
-
-# Main App
-def main():
-    st.title("Persona B Card Game")
-
-    # URL do Google Sheets CSV
-    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
-    csv_url = url+"/export?format=csv"
-
- # Carrega os dados
-    try:
-        df = load_data(csv_url)
-        st.success("Dados carregados com sucesso!")
-    except Exception as e:
-        st.error(f"Erro ao carregar os dados: {e}")
-        return  # Aborta a execução se não conseguir carregar os dados
-
-    # Estado para controlar a animação de virada
-    if 'flipped' not in st.session_state:
-        st.session_state.flipped = False
-
-    # Botão para gerar uma nova carta
-    if st.button("Gerar Nova Carta"):
-        st.session_state.current_card = get_random_card(df)
-        st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
-
-    # Inicializa a carta na sessão, se não existir
-    if 'current_card' not in st.session_state:
-        st.session_state.current_card = get_random_card(df)
 
     # Exibe o CSS
     st.markdown(card_style, unsafe_allow_html=True)
