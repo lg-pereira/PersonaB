@@ -1,6 +1,2 @@
 pandas
-geopandas
 requests
-st-gsheets-connection
-unicodedata
-re
