@@ -242,10 +242,11 @@ def main():
 
             # Tocar a buzina (somente Windows)
             try:
-                st.audio("assets/buzina.ogg", format="audio/ogg", autoplay=True)  # Buzina
+                st.empty():
+                st.audio("assets/buzer_start.mp3", format="audio/mp3", autoplay=True)  # Buzina
             except:
                 st.warning("Não foi possível tocar a buzina.")
-
+            
             # Simulação do jogo (substitua com a lógica real do seu jogo)
             with st.empty():
                 for i in range(tempo_segundos):
