@@ -1,22 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import unicodedata
-import re
-
-# Funções utilitárias
-
-@st.cache_data  # Cache para melhorar o desempenho do carregamento dos dados
-def load_data(url):
-    """Carrega os dados do CSV do Google Sheets."""
-    df = pd.read_csv(url)
-    return df
-
-
-def get_random_card(df):
-    """Seleciona uma carta aleatória do baralho."""
-    return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
-
 
 # Configurações da página Streamlit
 st.set_page_config(
@@ -26,12 +10,25 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Funções utilitárias
+
+@st.cache_data  # Cache para melhorar o desempenho do carregamento dos dados
+def load_data(url):
+    """Carrega os dados do CSV do Google Sheets."""
+    df = pd.read_csv(url)
+    return df
+
+def get_random_card(df):
+    """Seleciona uma carta aleatória do baralho."""
+    return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
+
+
 # Main App
 def main():
     st.title("Pictionary Card Game")
 
     # URL do Google Sheets CSV
-    csv_url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso/export?format=csv"
+    csv_url = "https://docs.google.com/sheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso/export?format=csv"
 
     # Carrega os dados
     try:
@@ -56,9 +53,8 @@ def main():
     st.markdown(f"<h4 style='text-align: left;'>Pessoa ou Animal: {st.session_state.current_card['Person or Animal']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Lugar ou Objeto: {st.session_state.current_card['Place or object']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Ação: {st.session_state.current_card['Action']}</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: left;'>Dificil: {st.session_state.current_card['Hard']}</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: left;'>Difícil: {st.session_state.current_card['Hard']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Diversos: {st.session_state.current_card['Mix']}</h4>", unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     main()
