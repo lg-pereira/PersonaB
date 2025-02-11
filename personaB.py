@@ -261,7 +261,7 @@ def main():
                 st.warning("Não foi possível tocar a buzina")
             timer_placeholder.write("Tempo da Equipe Esgotado!")
             st.success(f"Tempo da Equipe {equipe} esgotado!")
-            equipe++
+            equipe =+1
         else:
             equipe = 1
 
