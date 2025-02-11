@@ -22,7 +22,7 @@ def load_data(url):
 def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
-
+    
 # Main App
 def main():
     st.title("Persona B Card Game")
@@ -34,34 +34,36 @@ def main():
     # Carrega os dados
     try:
         df = load_data(csv_url)
-        # st.success("Dados carregados com sucesso!")
+        st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
 
-    # Estado para controlar a animação de virada
+    # Slider para controlar o tamanho da fonte
+    font_size = st.sidebar.slider("Tamanho da Fonte:", min_value=0.8, max_value=2.0, value=1.2, step=0.1)
+
+    # Inicializa o estado na sessão, se não existir
     if 'flipped' not in st.session_state:
-        st.session_state.flipped = True
+        st.session_state.flipped = False
+    if 'current_card' not in st.session_state:
+        st.session_state.current_card = get_random_card(df)
 
     # Função para verificar o estado da carta
     def handle_card_action():
+        st.write("Botão clicado!")  # Verificação
+
         if st.session_state.flipped:
-            # Já está virado, então apenas desvira
+            st.write("Desvirando a carta...")
             st.session_state.flipped = False
         else:
-            # Se a carta não estiver virada, gera uma nova carta e vira
+            st.write("Gerando nova carta e virando...")
             st.session_state.current_card = get_random_card(df)
             st.session_state.flipped = True
-
+        #st.experimental_rerun()  # Tente isso se o estado não estiver atualizando
 
     # Botão para gerar uma nova carta
     if st.button("Próxima carta"):
        handle_card_action()
-
-
-    # Inicializa a carta na sessão, se não existir
-    if 'current_card' not in st.session_state:
-        st.session_state.current_card = get_random_card(df)
 
    # CSS para estilizar o card
     card_style = """
@@ -121,9 +123,6 @@ def main():
         justify-content: center;
         align-items: center;
         padding: 10px;
-        background-image: url('https://i.pinimg.com/originals/08/f1/41/08f1414083e4d5c80bda059218353f11.jpg'); /* Adiciona a imagem de fundo */
-        background-size: cover;                  /* Ajusta a imagem para cobrir todo o fundo */
-        background-repeat: no-repeat;           /* Evita a repetição da imagem */
     }
     
     .card-id {
