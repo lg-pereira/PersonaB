@@ -38,25 +38,22 @@ def main():
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
-
-    # Inicializa o estado na sessão, se não existir
-    if 'flipped' not in st.session_state:
-        st.session_state.flipped = False
+        
+    # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
-        st.session_state.current_card = get_random_card(df)
+    st.session_state.current_card = get_random_card(df)
 
     # Função para verificar o estado da carta
     def handle_card_action():
         st.write("Botão clicado!")  # Verificação
 
-        if st.session_state.flipped:
-            st.write("Desvirando a carta...")
+        # Estado para controlar a animação de virada
+        if 'flipped' not in st.session_state:
             st.session_state.flipped = False
         else:
-            st.write("Gerando nova carta e virando...")
             st.session_state.current_card = get_random_card(df)
-            st.session_state.flipped = True
-        st.experimental_rerun()
+            st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
+        
 
     # Botão para gerar uma nova carta
     if st.button("Próxima carta"):
