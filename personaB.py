@@ -68,7 +68,7 @@ card_style = """
 .card-back {
     background-color: #e9e9e9; /* Cor de fundo do verso */
     color: #7C8D9E;
-    text-align: left;
+    text-align: center;
     transform: rotateY(180deg);
 }
 
