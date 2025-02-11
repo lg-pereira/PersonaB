@@ -97,7 +97,7 @@ card_style = """
     text-align: left;
     width: 90%;
     box-sizing: border-box;
-    font-size: 1.2em;   /* Adicionado tamanho da fonte */
+    font-size: 100%;   /* Adicionado tamanho da fonte */
     display: inline-block; /* Para espalhar horizontalmente */
     margin: 5px;         /* Adicionado margem */
 }
