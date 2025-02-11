@@ -241,8 +241,9 @@ def main():
                 minutos_restantes = tempo_restante // 60
                 segundos_restantes = tempo_restante % 60
                 st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-        st.success("Fim do tempo!")
-            audio_end()
+                if tempo_restante = 0:
+                    st.success("Fim do tempo!")
+                    audio_end()
 
 
 if __name__ == "__main__":
