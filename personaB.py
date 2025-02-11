@@ -62,12 +62,13 @@ card_style = """
 
 .card-front {
     background-color: #f9f9f9; /* Cor de fundo da frente */
-    color: #333;
+    color: #7EA1C5;
 }
 
 .card-back {
     background-color: #e9e9e9; /* Cor de fundo do verso */
-    color: #333;
+    color: #7C8D9E;
+    text-align: left;
     transform: rotateY(180deg);
 }
 
@@ -93,7 +94,7 @@ card_style = """
     background-color: #fff;
     border: 3px solid #ddd;
     text-align: left;
-    width: 75%;
+    width: 90%;
     box-sizing: border-box;
 }
 
