@@ -162,21 +162,21 @@ def main():
     st.markdown(card_style, unsafe_allow_html=True)
 
     # Exibe o card
+      # Exibe o card
     card_html = f"""
     <div class="card-container">
-        <div class="card {'flipped' if st.session_state.flipped else ''}">
+        <div class="card {{'flipped' if st.session_state.flipped else ''}}">
             <div class="card-face card-front">
-                <div class="card-id">ID: {st.session_state.current_card['ID']}</div>
-                <h2>Pictionary!</h2>
+                <h2>PERSONA B</h2>
             </div>
             <div class="card-face card-back">
-                <div class="card-id">ID: {st.session_state.current_card['ID']}</div>
+                <div class="card-id">{st.session_state.current_card['ID']}</div>
                 <ul class="card-options">
-                    <li>Pessoa ou Animal: {st.session_state.current_card['Person or Animal']}</li>
-                    <li>Lugar ou Objeto: {st.session_state.current_card['Place or object']}</li>
-                    <li>Ação: {st.session_state.current_card['Action']}</li>
-                    <li>Difícil: {st.session_state.current_card['Hard']}</li>
-                    <li>Diversos: {st.session_state.current_card['Mix']}</li>
+                    <li>P: {st.session_state.current_card['Person or Animal']}</li>
+                    <li>L: {st.session_state.current_card['Place or object']}</li>
+                    <li>A: {st.session_state.current_card['Action']}</li>
+                    <li>D: {st.session_state.current_card['Hard']}</li>
+                    <li>M: {st.session_state.current_card['Mix']}</li>
                 </ul>
             </div>
         </div>
