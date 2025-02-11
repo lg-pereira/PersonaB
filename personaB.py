@@ -91,9 +91,9 @@ card_style = """
     margin-bottom: 5px;
     border-radius: 5px;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 3px solid #ddd;
     text-align: left;
-    width: 100%;
+    width: 750%;
     box-sizing: border-box;
 }
 
