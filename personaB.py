@@ -58,7 +58,7 @@ def start():
 
 
     # Botão para gerar uma nova carta
-    if st.button("Próximo jogador"):
+    if st.button("Virar carta"):
        handle_card_action()
 
 
