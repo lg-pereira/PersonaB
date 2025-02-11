@@ -60,8 +60,7 @@ def start():
     # Botão para gerar uma nova carta
     if st.button("Virar carta"):
        handle_card_action()
-       start_timer(num_equipes, tempo_segundos, equipe)
-
+       
     # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
         st.session_state.current_card = get_random_card(df)
@@ -218,7 +217,8 @@ def start_timer(num_equipes, tempo_segundos, equipe):
         st.warning("Não foi possível tocar a buzina de início")
     
     timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
- 
+    start()
+    
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
@@ -256,7 +256,7 @@ def main():
     if st.button("Iniciar"):
         if equipe > num_equipes:
             equipe = 1
-            start()
+            start_timer(num_equipes, tempo_segundos, equipe)
    
     
 
