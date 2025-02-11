@@ -4,7 +4,7 @@ import random
 
 # Configurações da página Streamlit
 st.set_page_config(
-    page_title="Pictionary Card Game",
+    page_title="Persona B Card Game",
     page_icon=":pencil2:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -25,7 +25,7 @@ def get_random_card(df):
 
 # Main App
 def main():
-    st.title("Pictionary Card Game")
+    st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
     url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
@@ -49,8 +49,7 @@ def main():
 
 
     # Exibe a carta
-    st.header("Carta para Desenhar")
-    st.subheader(f"ID: {st.session_state.current_card['ID']}")
+    st.header("Carta {st.session_state.current_card['ID']}")
     st.markdown(f"<h4 style='text-align: left;'>Pessoa ou Animal: {st.session_state.current_card['Person or Animal']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Lugar ou Objeto: {st.session_state.current_card['Place or object']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Ação: {st.session_state.current_card['Action']}</h4>", unsafe_allow_html=True)
