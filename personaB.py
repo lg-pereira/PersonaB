@@ -242,21 +242,25 @@ def main():
 
             # Tocar a buzina (somente Windows)
             try:
-                st.empty():
                 st.audio("assets/buzer_start.mp3", format="audio/mp3", autoplay=True)  # Buzina
             except:
-                st.warning("Não foi possível tocar a buzina.")
+                st.warning("Não foi possível tocar a buzina")
             
             # Simulação do jogo (substitua com a lógica real do seu jogo)
-            with st.empty():
-                for i in range(tempo_segundos):
-                    time.sleep(1)
-                    tempo_restante = tempo_segundos - i
-                    minutos_restantes = tempo_restante // 60
-                    segundos_restantes = tempo_restante % 60
-                    st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-            st.success(f"Tempo da Equipe {equipe} esgotado!")
+             timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
 
+            for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
+                minutos_restantes = i // 60
+                segundos_restantes = i % 60
+                timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
+                time.sleep(1)
+
+            try:
+                st.audio("assets/looser.mp3", format="audio/mp3", autoplay=True)  # Buzina
+            except:
+                st.warning("Não foi possível tocar a buzina")
+            timer_placeholder.write("Tempo da Equipe Esgotado!")
+            st.success(f"Tempo da Equipe {equipe} esgotado!")
 
 if __name__ == "__main__":
     main()
