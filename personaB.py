@@ -106,7 +106,7 @@ card_style = """
 /* Adicione um estilo para o botão */
 .stButton>button {
     background-color: #4CAF50; /* Verde */
-    border: none;
+    border: 3px solid #ffff;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -157,7 +157,7 @@ def main():
     <div class="card-container">
         <div class="card {'flipped' if st.session_state.flipped else ''}">
             <div class="card-face card-front">
-                <h2>PERSONA B <br>IMAGEM E AÇÃO<br>COM TEMAS BÍBLICOS!</h2>
+                <h2>PERSONA B</h2>
             </div>
             <div class="card-face card-back">
                 <div class="card-id">{st.session_state.current_card['ID']}</div>
