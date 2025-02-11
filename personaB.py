@@ -228,22 +228,33 @@ def main():
 
         st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
-
     # Botão Iniciar (fora do sidebar)
     if st.button("Iniciar"):
-        st.write(f"Jogo iniciado com {num_equipes} equipes e tempo de {minutos:02d}:{segundos:02d}!")
+        for equipe in range(1, num_equipes + 1):
+            st.write(f"É a vez da Equipe {equipe}, com tempo de {minutos:02d}:{segundos:02d}!")
 
-        # Simulação do jogo (substitua com a lógica real do seu jogo)
-        with st.empty():
-            for i in range(tempo_segundos):
+            # Contagem Regressiva
+            countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
+            for i in range(3, 0, -1):
+                countdown_placeholder.write(f"Começando em: {i}...")
                 time.sleep(1)
-                tempo_restante = tempo_segundos - i
-                minutos_restantes = tempo_restante // 60
-                segundos_restantes = tempo_restante % 60
-                st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-                if tempo_restante == 0:
-                    st.success("Fim do tempo!")
-                    audio_end()
+            countdown_placeholder.write("VALENDO!")
+
+            # Tocar a buzina (somente Windows)
+            try:
+                playsound("assets/buzina.ogg")   # Buzina padrão do sistema
+            except:
+                st.warning("Não foi possível tocar a buzina.")
+
+            # Simulação do jogo (substitua com a lógica real do seu jogo)
+            with st.empty():
+                for i in range(tempo_segundos):
+                    time.sleep(1)
+                    tempo_restante = tempo_segundos - i
+                    minutos_restantes = tempo_restante // 60
+                    segundos_restantes = tempo_restante % 60
+                    st.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
+            st.success(f"Tempo da Equipe {equipe} esgotado!")
 
 
 if __name__ == "__main__":
