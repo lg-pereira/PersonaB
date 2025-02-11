@@ -1,6 +1,37 @@
 import streamlit as st
 import pandas as pd
 import random
+import unicodedata
+import re
+
+# Funções utilitárias
+
+@st.cache_data  # Cache para melhorar o desempenho do carregamento dos dados
+def load_data(url):
+    """Carrega os dados do CSV do Google Sheets."""
+    df = pd.read_csv(url)
+    # Limpa os nomes das colunas
+    df.columns = [normalize_text(col) for col in df.columns]
+    # Limpa os dados em cada coluna (exceto 'ID', assumindo que ID é numérico)
+    for col in df.columns:
+        if col != 'ID':
+            df[col] = df[col].astype(str).apply(normalize_text) # Garante que é string antes de normalizar
+    return df
+
+
+def get_random_card(df):
+    """Seleciona uma carta aleatória do baralho."""
+    return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
+
+def normalize_text(text):
+    """Remove acentos e caracteres especiais."""
+    if not isinstance(text, str):
+        return text  # Se não for string, retorna sem modificar
+
+    text = str(text)  # Garante que é uma string
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+    text = re.sub(r'[^\w\s-]', '', text).strip()  # Remove pontuações e caracteres especiais (mantém espaços e hífens)
+    return text
 
 # Configurações da página Streamlit
 st.set_page_config(
@@ -9,19 +40,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-
-# Funções utilitárias
-
-@st.cache_data  # Cache para melhorar o desempenho do carregamento dos dados
-def load_data(url):
-    """Carrega os dados do CSV do Google Sheets."""
-    df = pd.read_csv(url)
-    return df
-
-def get_random_card(df):
-    """Seleciona uma carta aleatória do baralho."""
-    return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
-
 
 # Main App
 def main():
@@ -52,10 +70,9 @@ def main():
     st.subheader(f"ID: {st.session_state.current_card['ID']}")
     st.markdown(f"<h4 style='text-align: left;'>Pessoa ou Animal: {st.session_state.current_card['Pessoa ou animal']}</h4>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: left;'>Lugar ou Objeto: {st.session_state.current_card['Lugar ou objeto']}</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: left;'>Ação: {st.session_state.current_card['Ação']}</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: left;'>Difícil: {st.session_state.current_card['Difícil']}</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: left;'>Ação: {st.session_state.current_card['Acao']}</h4>", unsafe_allow_html=True) # Corrigi o nome da coluna aqui
+    st.markdown(f"<h4 style='text-align: left;'>Dificil: {st.session_state.current_card['Dificil']}</h4>", unsafe_allow_html=True) # Corrigi o nome da coluna aqui
     st.markdown(f"<h4 style='text-align: left;'>Diversos: {st.session_state.current_card['Diversos']}</h4>", unsafe_allow_html=True)
-
 
 
 if __name__ == "__main__":
