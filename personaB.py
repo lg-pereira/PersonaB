@@ -34,14 +34,14 @@ def main():
     # Carrega os dados
     try:
         df = load_data(csv_url)
-        st.success("Dados carregados com sucesso!")
+        # st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
 
     # Estado para controlar a animação de virada
     if 'flipped' not in st.session_state:
-        st.session_state.flipped = False
+        st.session_state.flipped = True
 
     # Função para verificar o estado da carta
     def handle_card_action():
