@@ -216,9 +216,11 @@ def start_timer(num_equipes, tempo_segundos, equipe):
             st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)
     except:
         st.warning("Não foi possível tocar a buzina de início")
+
     
     timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
-    
+    start() #ADD this line
+
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
