@@ -72,6 +72,15 @@ card_style = """
     color: #7C8D9E;
     text-align: center;
     transform: rotateY(180deg);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-image: url('assets/card_back.jpg'); /* Adiciona a imagem de fundo */
+    background-size: cover;                  /* Ajusta a imagem para cobrir todo o fundo */
+    background-repeat: no-repeat;  
 }
 
 .card-id {
