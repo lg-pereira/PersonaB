@@ -247,7 +247,7 @@ def main():
                 st.warning("Não foi possível tocar a buzina")
             
             # Simulação do jogo (substitua com a lógica real do seu jogo)
-             timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
+            timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
 
             for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
                 minutos_restantes = i // 60
