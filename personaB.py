@@ -28,23 +28,26 @@ def main():
     st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
-    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
+    url = "https://docs.google.com/sheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
     csv_url = url+"/export?format=csv"
 
- # Carrega os dados
+    # Carrega os dados
     try:
         df = load_data(csv_url)
-        # st.success("Dados carregados com sucesso!")
+        st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return  # Aborta a execução se não conseguir carregar os dados
+
+    # Slider para controlar o tamanho da fonte
+    font_size = st.sidebar.slider("Tamanho da Fonte:", min_value=0.8, max_value=2.0, value=1.2, step=0.1)
 
     # Estado para controlar a animação de virada
     if 'flipped' not in st.session_state:
         st.session_state.flipped = False
 
     # Botão para gerar uma nova carta
-    if st.button("Gerar Nova Carta"):
+    if st.button("Próxima carta"):
         st.session_state.current_card = get_random_card(df)
         st.session_state.flipped = not st.session_state.flipped  # Inverte o estado para animar
 
@@ -53,107 +56,104 @@ def main():
         st.session_state.current_card = get_random_card(df)
 
     # CSS para estilizar o card
-    card_style = """
+    card_style = f"""
     <style>
-    .card-container {
+    .card-container {{
         perspective: 1000px;
-        width: 300px; /* Ajuste o tamanho conforme necessário */
-        height: 400px; /* Ajuste o tamanho conforme necessário */
+        width: 300px;
+        height: 400px;
         margin: 20px auto;
-    }
-    
-    .card {
+    }}
+
+    .card {{
         position: relative;
         width: 100%;
         height: 100%;
         transition: transform 0.8s;
         transform-style: preserve-3d;
-    }
-    
-    .card.flipped {
+    }}
+
+    .card.flipped {{
         transform: rotateY(180deg);
-    }
-    
-    .card-face {
+    }}
+
+    .card-face {{
         position: absolute;
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Alinha ao topo */
+        justify-content: flex-start;
         align-items: center;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #f9f9f9;
-    }
-    
-    .card-front {
-        background-color: #f9f9f9; /* Cor de fundo da frente */
-        color: #7EA1C5;
-        text-align: center;
-        display: flex; /* Alterado para flex */
-        justify-content: center; /* Centraliza horizontalmente */
-        align-items: center;    /* Centraliza verticalmente */
-        font-size: 1.5em;       /* Aumenta o tamanho da fonte */
-    }
-    
-    .card-back {
-        background-color: #e9e9e9; /* Cor de fundo do verso */
-        color: #7C8D9E;
-        text-align: center;
+    }}
+
+    .card-front {{
+        background-color: #f9f9f9;
+        color: #333;
+    }}
+
+    .card-back {{
+        background-color: #e9e9e9;
+        color: #333;
         transform: rotateY(180deg);
-        display: flex; /* Alterado para flex */
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         padding: 10px;
-    }
-    
-    .card-id {
+    }}
+
+    .card-id {{
         border: 2px solid silver;
         padding: 5px 10px;
         border-radius: 5px;
         margin-bottom: 10px;
         background-color: white;
-    }
-    
+    }}
+
     .card-options {{
         list-style: none;
         padding: 0;
         margin: 0;
         width: 100%;
+        text-align: center;
     }}
-    
+
     .card-options li {{
         padding: 8px 12px;
         margin-bottom: 5px;
         border-radius: 5px;
         background-color: #fff;
-        border: 3px solid #ddd;
-        text-align: left; 
-        width: 90%;               
+        border: 1px solid #ddd;
+        text-align: center;
+        width: auto;
         box-sizing: border-box;
-        font-size: 1.2em;          /* Aumentado o tamanho da fonte */
-        display: inline-block;    /* Para espalhar horizontalmente */
+        font-size: {font_size}em; /* Tamanho da fonte dinâmico */
+        display: inline-block;
         margin: 5px;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        max-width: 150px;
     }}
-    
-    /* Adicione um estilo para o botão */
+
     .stButton>button {{
-        background-color: #5D6770;
-        border: 3px solid #7C8D9E;
+        background-color: #4CAF50;
+        border: none;
         color: white;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 100%;
+        font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 15px;
+        border-radius: 12px;
     }}
     </style>
     """
@@ -166,7 +166,7 @@ def main():
     <div class="card-container">
         <div class="card {{'flipped' if st.session_state.flipped else ''}}">
             <div class="card-face card-front">
-                <h2>PERSONA B</h2>
+                <h2>PERSONA B <br>seu imagem e ação<br>com temas bíblicos!</h2>
             </div>
             <div class="card-face card-back">
                 <div class="card-id">{st.session_state.current_card['ID']}</div>
@@ -183,6 +183,7 @@ def main():
     """
 
     st.markdown(card_html, unsafe_allow_html=True)
+
 
 if __name__ == "__main__":
     main()
