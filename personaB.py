@@ -22,6 +22,113 @@ def load_data(url):
 def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
+
+# CSS para estilizar o card
+    card_style = """
+    <style>
+    .card-container {
+        perspective: 1000px;
+        width: 350px; /* Ajuste o tamanho conforme necessário */
+        height: 450px; /* Ajuste o tamanho conforme necessário */
+        margin: 20px auto;
+    }
+    
+    .card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+    
+    .card.flipped {
+        transform: rotateY(180deg);
+    }
+    
+    .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Alinha ao topo */
+        align-items: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+    
+    .card-front {
+        background-color: #f9f9f9; /* Cor de fundo da frente */
+        color: #7EA1C5;
+        text-align: center;
+        display: flex; /* Alterado para flex */
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center;    /* Centraliza verticalmente */
+        font-size: 1.5em;       /* Aumenta o tamanho da fonte */
+    }
+    
+    .card-back {
+        background-color: #e9e9e9; /* Cor de fundo do verso */
+        color: #7C8D9E;
+        text-align: center;
+        transform: rotateY(180deg);
+        display: flex; /* Alterado para flex */
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .card-id {
+        border: 2px solid silver;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: white;
+    }
+    
+    .card-options {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .card-options li {
+        padding: 8px 12px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        background-color: #fff;
+        border: 3px solid #ddd;
+        text-align: left; 
+        width: 90%;               
+        box-sizing: border-box;
+        font-size: 1.2em;          /* Aumentado o tamanho da fonte */
+        display: inline-block;    /* Para espalhar horizontalmente */
+        margin: 5px;
+    
+    }
+    
+    /* Adicione um estilo para o botão */
+    .stButton>button {
+        background-color: #5D6770;
+        border: 3px solid #7C8D9E;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 100%;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+    </style>
+    """
     
 # Main App
 def main():
