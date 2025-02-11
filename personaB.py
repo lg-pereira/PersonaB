@@ -28,7 +28,7 @@ def get_random_card(df):
 
 # Start App
 def start():
-    st.title("Persona B Card Game")
+    # st.title("Persona B Card Game")
 
     # URL do Google Sheets CSV
     url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
@@ -218,6 +218,7 @@ def start_timer(num_equipes, tempo_segundos, equipe):
         st.warning("Não foi possível tocar a buzina de início")
     
     timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
+    start()
     
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
@@ -257,7 +258,6 @@ def main():
         if equipe > num_equipes:
             equipe = 1
         start_timer(num_equipes, tempo_segundos, equipe)
-        start()
     
 
 if __name__ == "__main__":
