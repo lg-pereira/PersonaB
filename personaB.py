@@ -64,25 +64,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
 
 def main():
     st.title("Persona B Card Game")
-
-    with st.sidebar:
-        st.header("Configurações do Jogo")
-        # Opção de tempo em segundos (30 a 120)
-        tempo_segundos = st.slider("Tempo (segundos)", min_value=15, max_value=120, value=60)
-
-        # Converter segundos em minutos e segundos para exibição
-        minutos = tempo_segundos // 60
-        segundos = tempo_segundos % 60
-
-        st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
-
-        play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
-        play_end_sound = st.checkbox("Som de fim do tempo", value="True")
-
-    with st.container(border = True):
-        if st.button("Start"):
-            start_timer(tempo_segundos, play_start_sound, play_end_sound)
-      
+    
     with st.container():
        
         # URL do Google Sheets CSV
@@ -114,14 +96,6 @@ def main():
         # Inicializa a carta na sessão, se não existir
         if 'current_card' not in st.session_state:
             st.session_state.current_card = get_random_card(df)
-        
-        
-        col1, col2, col3 = st.columns([1,2,1])  
-        # Botão Iniciar
-        with col2:
-            # Botão para gerar uma nova carta
-            if st.button("Virar carta"):
-               handle_card_action()
             
         # CSS para estilizar o card
         card_style = """
@@ -254,6 +228,33 @@ def main():
         """
     
         st.markdown(card_html, unsafe_allow_html=True)
+
+    with st.sidebar:
+        st.header("Configurações do Jogo")
+        # Opção de tempo em segundos (30 a 120)
+        tempo_segundos = st.slider("Tempo (segundos)", min_value=15, max_value=120, value=60)
+
+        # Converter segundos em minutos e segundos para exibição
+        minutos = tempo_segundos // 60
+        segundos = tempo_segundos % 60
+
+        st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
+
+        play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
+        play_end_sound = st.checkbox("Som de fim do tempo", value="True")
+
+    col1, col2, col3 = st.columns([1,2,1])  
+
+    with col1:
+        with st.container():
+            if st.button("Start"):
+                start_timer(tempo_segundos, play_start_sound, play_end_sound)    
+    
+    with col2:
+        with st.container():   # Botão para gerar uma nova carta
+            if st.button("Virar carta"):
+               handle_card_action()
+    
 
 
 if __name__ == "__main__":
