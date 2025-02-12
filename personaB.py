@@ -82,7 +82,7 @@ def main():
     
             st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
-           play_start_sound = st.checkbox("Tocar som para iniciar")
+            play_start_sound = st.checkbox("Tocar som para iniciar")
     
         # Botão Iniciar (fora do sidebar)
         if st.button("Start"):
