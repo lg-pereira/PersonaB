@@ -25,7 +25,7 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
-def start_timer(num_equipes, tempo_segundos, play):
+def start_timer(num_equipes, tempo_segundos, start_sound, end_sound):
     
     # Contagem Regressiva
     countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
@@ -34,7 +34,7 @@ def start_timer(num_equipes, tempo_segundos, play):
         time.sleep(1)
     countdown_placeholder.write("VALENDO!")
 
-    if play:
+    if start_sound:
         audio_start_placeholder = st.empty()
         try:
             # Renderiza o áudio dentro do placeholder
@@ -51,23 +51,22 @@ def start_timer(num_equipes, tempo_segundos, play):
         segundos_restantes = i % 60
         timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
         time.sleep(1)
-    
-    # Placeholder para o áudio de fim
-    audio_end_placeholder = st.empty()
-    try:
-        # Renderiza o áudio dentro do placeholder
-        with audio_end_placeholder:
-            st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
-    except:
-        st.warning("Não foi possível tocar a buzina de fim")
+        
+    if end_sound:
+        # Placeholder para o áudio de fim
+        audio_end_placeholder = st.empty()
+        try:
+            # Renderiza o áudio dentro do placeholder
+            with audio_end_placeholder:
+                st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
+        except:
+            st.warning("Não foi possível tocar a buzina de fim")
 
 def main():
     st.title("Persona B Card Game")
 
     with st.sidebar:
         st.header("Configurações do Jogo")
-        num_equipes = st.slider("Número de Equipes", min_value=2, max_value=5, value=2)
-        equipe = 1
         # Opção de tempo em segundos (30 a 120)
         tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
 
@@ -78,13 +77,11 @@ def main():
         st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
+        play_end_sound = st.checkbox("Som de fim do tempo", value="True")
 
     with st.container(border = True):
         if st.button("Start"):
-            if equipe > num_equipes:
-                equipe = 1
-            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
-            equipe =+1
+            start_timer(num_equipes, tempo_segundos, play_start_sound, play_end_sound)
       
     with st.container():
        
@@ -119,7 +116,7 @@ def main():
             st.session_state.current_card = get_random_card(df)
         
         
-        col1, col2, col3 = st.columns([1,1,1])  
+        col1, col2, col3 = st.columns([1,2,1])  
         # Botão Iniciar
         with col2:
             # Botão para gerar uma nova carta
