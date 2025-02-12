@@ -26,7 +26,6 @@ def get_random_card(df):
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
 def start_timer(num_equipes, tempo_segundos, equipe, play):
-    st.rerun(scope="fragment")
     st.write(f"É a vez da Equipe {equipe}!")
     
     # Contagem Regressiva
