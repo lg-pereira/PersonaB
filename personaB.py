@@ -62,6 +62,17 @@ def start_timer(num_equipes, tempo_segundos, equipe, play):
     except:
         st.warning("Não foi possível tocar a buzina de fim")
 
+ # Função para verificar o estado da carta
+def handle_card_action():
+    if st.session_state.flipped:
+        # Já está virado, então apenas desvira
+        st.session_state.flipped = False
+    else:
+        # Se a carta não estiver virada, gera uma nova carta e vira
+        st.session_state.current_card = get_random_card(df)
+        st.session_state.flipped = True   
+    
+
 def main():
     st.title("Persona B Card Game")
 
@@ -111,16 +122,6 @@ def main():
         # Estado para controlar a animação de virada
         if 'flipped' not in st.session_state:
             st.session_state.flipped = False
-    
-        # Função para verificar o estado da carta
-        def handle_card_action():
-            if st.session_state.flipped:
-                # Já está virado, então apenas desvira
-                st.session_state.flipped = False
-            else:
-                # Se a carta não estiver virada, gera uma nova carta e vira
-                st.session_state.current_card = get_random_card(df)
-                st.session_state.flipped = True   
     
         # Inicializa a carta na sessão, se não existir
         if 'current_card' not in st.session_state:
