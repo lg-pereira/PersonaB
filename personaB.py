@@ -65,25 +65,23 @@ def start_timer(num_equipes, tempo_segundos, equipe, play):
 
 def main():
     st.title("Persona B Card Game")
-    menu, card = st.columns(2)
 
-    with menu:
-        # Sidebar para opções
-        with st.sidebar:
-            st.header("Configurações do Jogo")
-            num_equipes = st.slider("Número de Equipes", min_value=2, max_value=5, value=2)
-            equipe = 1
-            # Opção de tempo em segundos (30 a 120)
-            tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
+    with st.sidebar:
+        st.header("Configurações do Jogo")
+        num_equipes = st.slider("Número de Equipes", min_value=2, max_value=5, value=2)
+        equipe = 1
+        # Opção de tempo em segundos (30 a 120)
+        tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
+
+        # Converter segundos em minutos e segundos para exibição
+        minutos = tempo_segundos // 60
+        segundos = tempo_segundos % 60
+
+        st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
+
+        play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
     
-            # Converter segundos em minutos e segundos para exibição
-            minutos = tempo_segundos // 60
-            segundos = tempo_segundos % 60
-    
-            st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
-
-            play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
-
+    # menu, card = st.columns(2)
     with card:
         st.header("Game Card")
 
@@ -113,16 +111,16 @@ def main():
                 st.session_state.current_card = get_random_card(df)
                 st.session_state.flipped = True
 
-        left, right = st.rows(2, vertical_alignment="bottom")
+        top, bottom = st.container(2)
 
-        with left:
+        with top:
             # Botão Iniciar (fora do sidebar)
             if st.button("Start"):
                 if equipe > num_equipes:
                     equipe = 1
                 start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
 
-        with right:
+        with bottom:
             # Botão para gerar uma nova carta
             if st.button("Virar carta"):
                handle_card_action()
