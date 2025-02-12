@@ -49,7 +49,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
-        countdown_placeholder.write(f"###TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}")
+        countdown_placeholder.write(f"**TIMER: "**+{minutos_restantes:02d}":"{segundos_restantes:02d}**)
         time.sleep(1)
         
     if end_sound:
