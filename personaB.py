@@ -28,7 +28,7 @@ def get_random_card(df):
 def start_timer(tempo_segundos, start_sound, end_sound):
     
     # Contagem Regressiva
-    countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
+    countdown_placeholder = st.subheader()  # Para atualizar a contagem regressiva
     for i in range(3, 0, -1):
         countdown_placeholder.write(f"Começando em: {i}...")
         time.sleep(1)
@@ -43,13 +43,10 @@ def start_timer(tempo_segundos, start_sound, end_sound):
         except:
             st.warning("Não foi possível tocar a buzina de início")
 
-    
-    timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
-
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
-        countdown_placeholder.write(f"##**TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}**")
+        countdown_placeholder.write(f"**TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}**")
         time.sleep(1)
         
     if end_sound:
