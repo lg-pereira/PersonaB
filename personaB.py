@@ -21,6 +21,19 @@ def load_data(url):
     df = pd.read_csv(url)
     return df
 
+def get_csv():
+   # URL do Google Sheets CSV
+    url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
+    csv_url = url+"/export?format=csv"
+
+    # Carrega os dados
+    try:
+        df = load_data(csv_url)
+        return df # st.success("Dados carregados com sucesso!")
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados: {e}")
+        return  # Aborta a execução se não conseguir carregar os dados  
+
 def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
@@ -63,7 +76,7 @@ def start_timer(num_equipes, tempo_segundos, equipe, play):
         st.warning("Não foi possível tocar a buzina de fim")
 
  # Função para verificar o estado da carta
-def handle_card_action():
+def handle_card_action(df):
     if st.session_state.flipped:
         # Já está virado, então apenas desvira
         st.session_state.flipped = False
@@ -107,18 +120,8 @@ def main():
                handle_card_action()
     
     with st.container():
-        # URL do Google Sheets CSV
-        url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
-        csv_url = url+"/export?format=csv"
-    
-        # Carrega os dados
-        try:
-            df = load_data(csv_url)
-            # st.success("Dados carregados com sucesso!")
-        except Exception as e:
-            st.error(f"Erro ao carregar os dados: {e}")
-            return  # Aborta a execução se não conseguir carregar os dados
-    
+       
+        df = get_csv()
         # Estado para controlar a animação de virada
         if 'flipped' not in st.session_state:
             st.session_state.flipped = False
