@@ -90,9 +90,6 @@ def main():
             equipe =+1
       
     with st.container():
-        # Botão para gerar uma nova carta
-        if st.button("Virar carta"):
-           handle_card_action()
        
         # URL do Google Sheets CSV
         url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
@@ -123,9 +120,12 @@ def main():
         # Inicializa a carta na sessão, se não existir
         if 'current_card' not in st.session_state:
             st.session_state.current_card = get_random_card(df)
-    
+
+        # Botão para gerar uma nova carta
+        if st.button("Virar carta"):
+           handle_card_action()
+            
         # CSS para estilizar o card
-            # CSS para estilizar o card
         card_style = """
         <style>
         .card-container {
