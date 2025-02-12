@@ -29,7 +29,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
     
     # Contagem Regressiva
     countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
-    for i in range(3, 0, -1):
+    for i in range(10, 0, -1):
         countdown_placeholder.write(f"Começando em: {i}...")
         time.sleep(1)
     # countdown_placeholder.write("VALENDO!")
