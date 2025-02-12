@@ -79,7 +79,7 @@ def main():
 
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
 
-    # with st.container(border = True):
+    with st.container(border = True):
       
         # Botão Iniciar
         if st.button("Start"):
