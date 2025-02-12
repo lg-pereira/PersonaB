@@ -80,8 +80,9 @@ def main():
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
 
     with st.container(border = True):
-      
+    col1, col2, col3 = st.columns([1,1,1])  
         # Botão Iniciar
+    with col2:
         if st.button("Start"):
             if equipe > num_equipes:
                 equipe = 1
@@ -119,10 +120,14 @@ def main():
         # Inicializa a carta na sessão, se não existir
         if 'current_card' not in st.session_state:
             st.session_state.current_card = get_random_card(df)
-
-        # Botão para gerar uma nova carta
-        if st.button("Virar carta"):
-           handle_card_action()
+        
+        
+        col1, col2, col3 = st.columns([1,1,1])  
+        # Botão Iniciar
+        with col2:
+            # Botão para gerar uma nova carta
+            if st.button("Virar carta"):
+               handle_card_action()
             
         # CSS para estilizar o card
         card_style = """
