@@ -80,14 +80,11 @@ def main():
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
 
     with st.container(border = True):
-        col1, col2, col3 = st.columns([1,1,1])  
-            # Botão Iniciar
-        with col2:
-            if st.button("Start"):
-                if equipe > num_equipes:
-                    equipe = 1
-                start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
-                equipe =+1
+        if st.button("Start"):
+            if equipe > num_equipes:
+                equipe = 1
+            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
+            equipe =+1
       
     with st.container():
        
