@@ -113,7 +113,7 @@ def main():
                 st.session_state.current_card = get_random_card(df)
                 st.session_state.flipped = True
 
-        left, right = st.columns(2, vertical_alignment="bottom")
+        left, right = st.rows(2, vertical_alignment="bottom")
 
         with left:
             # Botão Iniciar (fora do sidebar)
