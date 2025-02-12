@@ -83,12 +83,6 @@ def main():
             st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
             play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
-    
-        # Botão Iniciar (fora do sidebar)
-        if st.button("Start"):
-            if equipe > num_equipes:
-                equipe = 1
-            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
 
     with card:
         st.header("Game Card")
@@ -118,12 +112,21 @@ def main():
                 # Se a carta não estiver virada, gera uma nova carta e vira
                 st.session_state.current_card = get_random_card(df)
                 st.session_state.flipped = True
-    
-    
-        # Botão para gerar uma nova carta
-        if st.button("Virar carta"):
-           handle_card_action()
-    
+
+        left, right = st.columns(2, vertical_alignment="bottom")
+
+        with left:
+            # Botão Iniciar (fora do sidebar)
+            if st.button("Start"):
+                if equipe > num_equipes:
+                    equipe = 1
+                start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
+
+        with right:
+            # Botão para gerar uma nova carta
+            if st.button("Virar carta"):
+               handle_card_action()
+        
     
         # Inicializa a carta na sessão, se não existir
         if 'current_card' not in st.session_state:
