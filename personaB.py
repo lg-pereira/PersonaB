@@ -32,7 +32,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
     for i in range(3, 0, -1):
         countdown_placeholder.write(f"Começando em: {i}...")
         time.sleep(1)
-    countdown_placeholder.write("VALENDO!")
+    # countdown_placeholder.write("VALENDO!")
 
     if start_sound:
         audio_start_placeholder = st.empty()
@@ -44,12 +44,12 @@ def start_timer(tempo_segundos, start_sound, end_sound):
             st.warning("Não foi possível tocar a buzina de início")
 
     
-    timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
+    timer_placeholder = st.subheader() #placeholder para o timer regressivo do jogo
 
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
-        timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
+        countdown_placeholder.write(f"TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}")
         time.sleep(1)
         
     if end_sound:
