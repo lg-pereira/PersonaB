@@ -49,7 +49,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
     for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
         minutos_restantes = i // 60
         segundos_restantes = i % 60
-        countdown_placeholder.write(f"**TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}**")
+        countdown_placeholder.write(f"##**TIMER: {minutos_restantes:02d}:{segundos_restantes:02d}**")
         time.sleep(1)
         
     if end_sound:
@@ -247,12 +247,12 @@ def main():
 
     with col1:
         with st.container():
-            if st.button("Start"):
+            if st.button("START"):
                 start_timer(tempo_segundos, play_start_sound, play_end_sound)    
     
     with col2:
         with st.container():   # Botão para gerar uma nova carta
-            if st.button("Virar carta"):
+            if st.button("STOP"):
                handle_card_action()
     
 
