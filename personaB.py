@@ -111,16 +111,14 @@ def main():
             st.session_state.current_card = get_random_card(df)
             st.session_state.flipped = True
 
-    top, bottom = st.container(2)
-
-    with top:
+    with st.container():
         # Botão Iniciar (fora do sidebar)
         if st.button("Start"):
             if equipe > num_equipes:
                 equipe = 1
             start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
 
-    with bottom:
+    with st.container():
         # Botão para gerar uma nova carta
         if st.button("Virar carta"):
            handle_card_action()
