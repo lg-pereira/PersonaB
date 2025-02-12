@@ -25,10 +25,46 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
+def start_timer(num_equipes, tempo_segundos, equipe):
+    st.write(f"É a vez da Equipe {equipe}!")
+    
+    # Contagem Regressiva
+    countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
+    for i in range(3, 0, -1):
+        countdown_placeholder.write(f"Começando em: {i}...")
+        time.sleep(1)
+    countdown_placeholder.write("VALENDO!")
+    
+    audio_start_placeholder = st.empty()
+    try:
+        # Renderiza o áudio dentro do placeholder
+        with audio_start_placeholder:
+            st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)
+    except:
+        st.warning("Não foi possível tocar a buzina de início")
+
+    
+    timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
+
+    for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
+        minutos_restantes = i // 60
+        segundos_restantes = i % 60
+        timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
+        time.sleep(1)
+    
+    # Placeholder para o áudio de fim
+    audio_end_placeholder = st.empty()
+    try:
+        # Renderiza o áudio dentro do placeholder
+        with audio_end_placeholder:
+            st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
+    except:
+        st.warning("Não foi possível tocar a buzina de fim")
+    equipe =+1
 
 # Start App
-def start():
-    st.title("Persona B Card Game")
+def card_flip():
+    st.header("Game Card")
 
     # URL do Google Sheets CSV
     url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
@@ -199,50 +235,14 @@ def start():
 
     st.markdown(card_html, unsafe_allow_html=True)
 
-def start_timer(num_equipes, tempo_segundos, equipe):
-    st.write(f"É a vez da Equipe {equipe}!")
-    
-    # Contagem Regressiva
-    countdown_placeholder = st.empty()  # Para atualizar a contagem regressiva
-    for i in range(3, 0, -1):
-        countdown_placeholder.write(f"Começando em: {i}...")
-        time.sleep(1)
-    countdown_placeholder.write("VALENDO!")
-    
-    audio_start_placeholder = st.empty()
-    try:
-        # Renderiza o áudio dentro do placeholder
-        with audio_start_placeholder:
-            st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)
-    except:
-        st.warning("Não foi possível tocar a buzina de início")
 
-    
-    timer_placeholder = st.empty() #placeholder para o timer regressivo do jogo
-    start() #ADD this line
 
-    for i in range(tempo_segundos, -1, -1): #contagem do tempo do jogo
-        minutos_restantes = i // 60
-        segundos_restantes = i % 60
-        timer_placeholder.write(f"Tempo restante: {minutos_restantes:02d}:{segundos_restantes:02d}")
-        time.sleep(1)
-    
-    # Placeholder para o áudio de fim
-    audio_end_placeholder = st.empty()
-    try:
-        # Renderiza o áudio dentro do placeholder
-        with audio_end_placeholder:
-            st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
-    except:
-        st.warning("Não foi possível tocar a buzina de fim")
-    equipe =+1
-
-def main():
-    st.title("Menu Game Card")
+def menu():
+    st.header("Menu Game Card")
 
     # Sidebar para opções
     with st.sidebar:
-        st.header("Configurações do Jogo")
+        st.subheader("Configurações do Jogo")
         num_equipes = st.slider("Número de Equipes", min_value=2, max_value=5, value=2)
         equipe = 1
         # Opção de tempo em segundos (30 a 120)
@@ -255,10 +255,21 @@ def main():
         st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
     # Botão Iniciar (fora do sidebar)
-    if st.button("Iniciar"):
+    if st.button("Start"):
         if equipe > num_equipes:
             equipe = 1
         start_timer(num_equipes, tempo_segundos, equipe)
+
+def main():
+    st.title("Persona B Card Game")
+    menu, card = st.columns(2)
+
+    with menu:
+        menu()
+
+    with card:
+        card_flip()
+
 
 if __name__ == "__main__":
     main()
