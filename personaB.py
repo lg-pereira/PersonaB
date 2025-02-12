@@ -84,19 +84,19 @@ def main():
         
         left, right = st.columns(2)
         with left:
-            st.button("Start")
+            start = st.button("Start")
         with right:
-            st.button("Virar carta")
+            flip = st.button("Virar carta")
             
         # Botão Iniciar (fora do sidebar)
-        if st.button("Start"):
+        if start:
             if equipe > num_equipes:
                 equipe = 1
             start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
             equipe =+1
             
         # Botão para gerar uma nova carta
-        if st.button("Virar carta"):
+        if flip:
            handle_card_action()
     
     with st.container():
