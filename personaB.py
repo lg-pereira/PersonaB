@@ -82,7 +82,7 @@ def main():
 
     with st.container():
         
-        left, riight = st.columns(2)
+        left, right = st.columns(2)
         with left:
             st.button("Start")
         with right:
