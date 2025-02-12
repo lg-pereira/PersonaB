@@ -61,7 +61,6 @@ def start_timer(num_equipes, tempo_segundos, equipe, play):
             st.audio("assets/looser.mp3", format="audio/mp3", start_time=0, autoplay=True)
     except:
         st.warning("Não foi possível tocar a buzina de fim")
-    equipe =+1
 
 def main():
     st.title("Persona B Card Game")
@@ -80,9 +79,27 @@ def main():
         st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
+
+    with st.container():
+        
+        left, riight = st.columns(2)
+        with left:
+            st.button("Start")
+        with right:
+            st.button("Virar carta")
+            
+        # Botão Iniciar (fora do sidebar)
+        if st.button("Start"):
+            if equipe > num_equipes:
+                equipe = 1
+            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
+            equipe =+1
+            
+        # Botão para gerar uma nova carta
+        if st.button("Virar carta"):
+           handle_card_action()
     
-    # menu, card = st.columns(2)
-    # with card:
+    with st.container():
     st.header("Game Card")
 
     # URL do Google Sheets CSV
@@ -109,20 +126,7 @@ def main():
         else:
             # Se a carta não estiver virada, gera uma nova carta e vira
             st.session_state.current_card = get_random_card(df)
-            st.session_state.flipped = True
-
-    with st.container():
-        # Botão Iniciar (fora do sidebar)
-        if st.button("Start"):
-            if equipe > num_equipes:
-                equipe = 1
-            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
-
-    with st.container():
-        # Botão para gerar uma nova carta
-        if st.button("Virar carta"):
-           handle_card_action()
-    
+            st.session_state.flipped = True   
 
     # Inicializa a carta na sessão, se não existir
     if 'current_card' not in st.session_state:
