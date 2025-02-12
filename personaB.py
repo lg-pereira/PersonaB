@@ -25,7 +25,8 @@ def get_random_card(df):
     """Seleciona uma carta aleatória do baralho."""
     return df.sample(n=1).iloc[0]  # Retorna a linha como uma Series
 
-def start_timer(num_equipes, tempo_segundos, equipe):
+def start_timer(num_equipes, tempo_segundos, equipe, play):
+    st.rerun(scope="fragment")
     st.write(f"É a vez da Equipe {equipe}!")
     
     # Contagem Regressiva
@@ -35,7 +36,7 @@ def start_timer(num_equipes, tempo_segundos, equipe):
         time.sleep(1)
     countdown_placeholder.write("VALENDO!")
 
-    if play_start_sound:
+    if play:
         audio_start_placeholder = st.empty()
         try:
             # Renderiza o áudio dentro do placeholder
@@ -82,13 +83,13 @@ def main():
     
             st.write(f"Tempo selecionado: {minutos:02d}:{segundos:02d}")
 
-            play_start_sound = st.checkbox("Tocar som para iniciar")
+            play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
     
         # Botão Iniciar (fora do sidebar)
         if st.button("Start"):
             if equipe > num_equipes:
                 equipe = 1
-            start_timer(num_equipes, tempo_segundos, equipe)
+            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
 
     with card:
         st.header("Game Card")
