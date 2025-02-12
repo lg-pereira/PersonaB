@@ -39,7 +39,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
         try:
             # Renderiza o áudio dentro do placeholder
             with audio_start_placeholder:
-                st.audio("assets/buzer_start.mp3", format="audio/mp3", start_time=0, autoplay=True)
+                st.audio("assets/start.mp3", format="audio/mp3", start_time=0, autoplay=True)
         except:
             st.warning("Não foi possível tocar a buzina de início")
 
@@ -68,7 +68,7 @@ def main():
     with st.sidebar:
         st.header("Configurações do Jogo")
         # Opção de tempo em segundos (30 a 120)
-        tempo_segundos = st.slider("Tempo (segundos)", min_value=30, max_value=120, value=60)
+        tempo_segundos = st.slider("Tempo (segundos)", min_value=15, max_value=120, value=60)
 
         # Converter segundos em minutos e segundos para exibição
         minutos = tempo_segundos // 60
