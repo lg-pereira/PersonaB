@@ -84,24 +84,18 @@ def main():
         
         left, right = st.columns(2)
         with left:
-            start = st.button("Start")
-        with right:
-            flip = st.button("Virar carta")
-            
-        # Botão Iniciar (fora do sidebar)
-        if start:
-            if equipe > num_equipes:
-                equipe = 1
-            start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
-            equipe =+1
-            
-        # Botão para gerar uma nova carta
-        if flip:
-           handle_card_action()
+            # Botão Iniciar (fora do sidebar)
+            if st.button("Start"):
+                if equipe > num_equipes:
+                    equipe = 1
+                start_timer(num_equipes, tempo_segundos, equipe, play_start_sound)
+                equipe =+1
+        with right:   
+            # Botão para gerar uma nova carta
+            if st.button("Virar carta"):
+               handle_card_action()
     
     with st.container():
-        st.header("Game Card")
-    
         # URL do Google Sheets CSV
         url = "https://docs.google.com/spreadsheets/d/1_9Sy_1nAVku52AeKUIDvjvJHMxFInMyGYWjM1Jw4jso"
         csv_url = url+"/export?format=csv"
