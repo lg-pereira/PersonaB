@@ -242,8 +242,8 @@ def main():
         
         st.title("Instruções do Jogo")
         st.write("Para iniciar clique primeiro em STOP e depois START.")
-        st.write("Ao clicar será iniciado um timer de 10s para preparação e depois um timer com o tempo escolhido aqui nas opções. \nClique em STOP para parar o tempo e depois em START novamente para uma nova carta.")
-        st.write("Cada carta tem 5 categorias: <br />[P]essoa ou animal \n[L]ugar ou objeto \n[A]ção \n[D]ifícil \n[M]ix")
+        st.write("Ao clicar será iniciado um timer de 10s para preparação e depois um timer com o tempo escolhido aqui nas opções.  \n Clique em STOP para parar o tempo e depois em START novamente para uma nova carta.")
+        st.write("Cada carta tem 5 categorias:  \n [P]essoa ou animal  \n [L]ugar ou objeto  \n [A]ção  \n [D]ifícil  \n [M]ix")
 
     col1, col2, col3 = st.columns([1,2,1])  
 
