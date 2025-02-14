@@ -60,7 +60,7 @@ def start_timer(tempo_segundos, start_sound, end_sound):
             st.warning("Não foi possível tocar a buzina de fim")
 
 def main():
-    st.title("Persona B Card Game")
+    st.title("Game Persona B 📖")
     
     with st.container():
        
@@ -239,6 +239,10 @@ def main():
 
         play_start_sound = st.checkbox("Tocar som para iniciar", value="True")
         play_end_sound = st.checkbox("Som de fim do tempo", value="True")
+        
+        st.tile("Instruções do Jogo")
+        st.write("Para iniciar clique em STOP e depois START")
+        st.write("Cada carta tem 5 categorias: [P]essoa ou animal, [L]ugar ou objeto, [A]ção, [D]ifícil e [M]ix")
 
     col1, col2, col3 = st.columns([1,2,1])  
 
