@@ -244,7 +244,7 @@ def main():
         st.write("Para iniciar clique primeiro em STOP e depois START.")
         st.write("Ao clicar será iniciado um timer de 10s para preparação e depois um timer com o tempo escolhido aqui nas opções.")
         st.write("Clique em STOP para parar o tempo e depois em START novamente para uma nova carta.")
-        st.write("Cada carta tem 5 categorias:<br>[P]essoa ou animal<br>[L]ugar ou objeto<br>[A]ção<br>[D]ifícil<br>[M]ix"')
+        st.write("Cada carta tem 5 categorias:<br>[P]essoa ou animal<br>[L]ugar ou objeto<br>[A]ção<br>[D]ifícil<br>[M]ix")
 
     col1, col2, col3 = st.columns([1,2,1])  
 
